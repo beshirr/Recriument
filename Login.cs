@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recriument;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -60,10 +61,9 @@ namespace recruitment
                         {
                             int employerId = Convert.ToInt32(employerResult);
 
-                            // Open employer home (you'll need to implement this)
-                            // EmployerHome employerHome = new EmployerHome(employerId);
-                            // employerHome.Show();
-                            // this.Hide();
+                            EmployerHome employerHome = new EmployerHome(employerId);
+                            employerHome.Show();
+                            this.Hide();
                             return;
                         }
                     }

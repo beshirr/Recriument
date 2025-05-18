@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recriument;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -62,12 +63,32 @@ namespace recruitment
 
                     cmd.ExecuteNonQuery();
 
+                    string IdQuery = "SELECT EMPLOYERID FROM EMPLOYER WHERE EMP_EMAIL = @Email AND EMP_PASSWORD = @Password";
+                    int employerId = 0;
+                    using (SqlCommand IdCmd = new SqlCommand(IdQuery, con))
+                    {
+                        IdCmd.Parameters.AddWithValue("@Email", email);
+                        IdCmd.Parameters.AddWithValue("@Password", password);
+
+                        object IdResult = IdCmd.ExecuteScalar();
+                        if (IdResult != null)
+                        {
+                            employerId = Convert.ToInt32(IdResult);
+
+                        }
+                    }
+
+                    string phoneQuery = "INSERT INTO EMPLOYER_PHONE (EMPLOYERID, EMP_PHONE) VALUES (@EmployerId, @Phone)";
+                    SqlCommand phoneCmd = new SqlCommand(phoneQuery, con);
+                    phoneCmd.Parameters.AddWithValue("@EmployerId", employerId);
+                    phoneCmd.Parameters.AddWithValue("@Phone", phone);
+                    phoneCmd.ExecuteNonQuery();
+
                     MessageBox.Show("Registration successful!");
 
-                    // Open employer home page (you'll need to implement this)
-                    // EmployerHome employerHome = new EmployerHome();
-                    // employerHome.Show();
-                    // this.Hide();
+                    EmployerHome employerHome = new EmployerHome(employerId);
+                    employerHome.Show();
+                    this.Hide();
                 }
             }
             catch (Exception ex)
