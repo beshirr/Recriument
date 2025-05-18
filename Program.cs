@@ -1,4 +1,9 @@
-﻿using System;
+using recruitment;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace Recriument
@@ -13,7 +18,7 @@ namespace Recriument
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SeekerHome());
+            Application.Run(new Index());
         }
     }
 }
