@@ -49,7 +49,7 @@ namespace recruitment
             }
             else 
             {
-                SqlConnection con = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRequirements;Integrated Security=True");
+                SqlConnection con = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True");
                 con.Open();
                 string query = "INSERT INTO SEEKER (S_FNAME, S_LNAME, S_EMAIL, S_PASSWORD, S_EDUCATIONLEVEL, EXPERIENCEYEARS, CERTIFICATIONS, SKILLS)" +
                     " VALUES (@FirstName, @LastName, @Email, @Password, @EducationLevel, @ExperienceYears, @Certifications, @Skills);";
@@ -76,15 +76,16 @@ namespace recruitment
                     seekerId = Convert.ToInt32(result);
                 }
                 
-                string query2 = "INSERT INTO SEEKER_PHONE (SID, S_PHONE)" +
+                string query2 = "INSERT INTO SEEKER_PHONE (SEEKERID, S_PHONE)" +
                     "VALUES (@SID, @Sphone);";
                 SqlCommand cmd2 = new SqlCommand(query2, con);
                 cmd2.Parameters.AddWithValue("@SID", seekerId);
                 cmd2.Parameters.AddWithValue("@Sphone", phone);
+                cmd2.ExecuteNonQuery();
                 con.Close();
 
-                SeekerHome seekerHome = new SeekerHome();
-                seekerHome.Show();
+                //SeekerHome seekerHome = new SeekerHome();
+                //seekerHome.Show();
                 this.Hide();
             }
         }
