@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recriument;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,10 @@ namespace recruitment
 {
     public partial class VacancyForm : Form
     {
-        private int employerId = 1;
+        private int employerId;
 
 
-        public VacancyForm()
+        public VacancyForm(int currentID)
         {
             InitializeComponent();
             this.Load += VacancyForm_Load;
@@ -23,6 +24,7 @@ namespace recruitment
             btnAdd.Click += btnAdd_Click; 
             btnUpdate.Click += btnUpdate_Click; 
             btnDelete.Click += btnDelete_Click; 
+            this.employerId = currentID;
 
         }
 
@@ -289,9 +291,11 @@ namespace recruitment
 
         }
 
-      
-
-
-
+        private void done_button_Click(object sender, EventArgs e)
+        {
+            EmployerHome employerHome = new EmployerHome(employerId);
+            employerHome.Show();
+            this.Hide();
+        }
     }
 }

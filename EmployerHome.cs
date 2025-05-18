@@ -22,7 +22,7 @@ namespace Recriument
 
         private void addVacancy_button_Click(object sender, EventArgs e)
         {
-            VacancyForm vacancyForm = new VacancyForm();
+            VacancyForm vacancyForm = new VacancyForm(employerID);
             vacancyForm.Show();
             this.Hide();
         }
