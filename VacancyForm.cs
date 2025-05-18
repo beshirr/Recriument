@@ -1,13 +1,8 @@
-﻿using Recriument;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Recriument;
 
 namespace recruitment
 {
@@ -20,14 +15,14 @@ namespace recruitment
         public VacancyForm(int currentID)
         {
             this.employerId = currentID;
-            this.companyId = VacancyDAL.GetCompanyIdByEmployerId(employerId); 
+            this.companyId = VacancyDAL.GetCompanyIdByEmployerId(employerId);
 
             InitializeComponent();
             this.Load += VacancyForm_Load;
             dgvVacancies.SelectionChanged += dgvVacancies_SelectionChanged;
-            btnAdd.Click += btnAdd_Click; 
-            btnUpdate.Click += btnUpdate_Click; 
-            btnDelete.Click += btnDelete_Click; 
+            btnAdd.Click += btnAdd_Click;
+            btnUpdate.Click += btnUpdate_Click;
+            btnDelete.Click += btnDelete_Click;
 
         }
 
@@ -68,22 +63,22 @@ namespace recruitment
                 return false;
             }
 
-            return true; 
+            return true;
         }
 
 
         private void LoadVacancies()
         {
-            var vacancies = VacancyDAL.GetVacanciesByCompanyId(companyId); 
+            var vacancies = VacancyDAL.GetVacanciesByCompanyId(companyId);
 
             var displayList = vacancies.Select(v => new
             {
-                v.VACANCYID,
-                v.V_JOBTITLE,
-                v.V_EXPERIENCEREQUIRED,
-                Salary = v.V_SALARY.ToString("C"), 
-                Skills = string.Join(", ", v.V_SKILLSREQUIRED),
-                Status = v.ISVISIBLE ? "Visible" : "Hidden"
+                VacancyID = v.VACANCYID,
+                JobTitle = v.V_JOBTITLE,
+                ExperienceRequired = v.V_EXPERIENCEREQUIRED,
+                Salary = v.V_SALARY.ToString("C"),
+                SkillsRequired = string.Join(", ", v.V_SKILLSREQUIRED),
+                IsVisible = v.ISVISIBLE ? "Visible" : "Hidden"
             }).ToList();
 
             dgvVacancies.DataSource = displayList;
@@ -98,10 +93,10 @@ namespace recruitment
 
         private void dgvVacancies_SelectionChanged(object sender, EventArgs e)
         {
-            bool hasSelection = dgvVacancies.SelectedRows.Count > 0; 
+            bool hasSelection = dgvVacancies.SelectedRows.Count > 0;
 
-            btnUpdate.Enabled = hasSelection; 
-            btnDelete.Enabled = hasSelection; 
+            btnUpdate.Enabled = hasSelection;
+            btnDelete.Enabled = hasSelection;
 
             if (hasSelection)
             {
@@ -128,56 +123,53 @@ namespace recruitment
             txtJobTitle.Clear();
             txtJobDescription.Clear();
             txtSkills.Clear();
-            numExperience.Value = 0; 
+            numExperience.Value = 0;
             numSalary.Value = 0;
             chkIsVisible.Checked = true;
-            dgvVacancies.ClearSelection(); 
-            btnUpdate.Enabled = false; 
-            btnDelete.Enabled = false; 
-        } 
+            dgvVacancies.ClearSelection();
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ClearForm();
+            btnUpdate.Enabled = true;  // Now user can click update/save to insert new vacancy
+            btnDelete.Enabled = false;
+            dgvVacancies.ClearSelection();
+            // Optionally disable Add button to prevent confusion
         }
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (!ValidateInputs()) return;
 
-            if (!ValidateInputs())
-                return; 
-            try
+            Vacancy vacancy = new Vacancy
             {
-                Vacancy vacancy = new Vacancy
-                {
-                    COMPANYID_ = companyId, 
+                COMPANYID_ = companyId,
+                V_JOBTITLE = txtJobTitle.Text,
+                V_JOBDESCRIPTION = txtJobDescription.Text,
+                V_SKILLSREQUIRED = txtSkills.Text.Split(',').Select(s => s.Trim()).ToList(),
+                V_EXPERIENCEREQUIRED = (int)numExperience.Value,
+                V_SALARY = numSalary.Value,
+                ISVISIBLE = chkIsVisible.Checked
+            };
 
-                    V_JOBTITLE = txtJobTitle.Text,
-                    V_JOBDESCRIPTION = txtJobDescription.Text,
-                    V_SKILLSREQUIRED = txtSkills.Text.Split(',').Select(s => s.Trim()).ToList(),
-                    V_EXPERIENCEREQUIRED = (int)numExperience.Value,
-                    V_SALARY = numSalary.Value,
-                    ISVISIBLE = chkIsVisible.Checked,
-                };
-
-                if (dgvVacancies.SelectedRows.Count > 0)
-                {
-                    vacancy.VACANCYID = (int)dgvVacancies.SelectedRows[0].Cells["VacancyID"].Value;
-                    VacancyDAL.UpdateVacancy(vacancy);
-                    MessageBox.Show("Vacancy updated successfully.");
-                }
-                else
-                {
-                    VacancyDAL.inserVacancy(vacancy);
-                    MessageBox.Show("Vacancy added successfully.");
-                }
-
-                LoadVacancies();
-                ClearForm();
-            }
-            catch (Exception ex)
+            if (dgvVacancies.SelectedRows.Count > 0)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                // Update existing vacancy
+                vacancy.VACANCYID = (int)dgvVacancies.SelectedRows[0].Cells["VacancyID"].Value;
+                VacancyDAL.UpdateVacancy(vacancy);
+                MessageBox.Show("Vacancy updated successfully.");
             }
+            else
+            {
+                // Insert new vacancy
+                VacancyDAL.inserVacancy(vacancy);
+                MessageBox.Show("Vacancy added successfully.");
+            }
+
+            LoadVacancies();
+            ClearForm();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -227,7 +219,7 @@ namespace recruitment
 
         private void dgvVacancies_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
 
 
         }
@@ -265,8 +257,8 @@ namespace recruitment
         private void VacancyForm_Load(object sender, EventArgs e)
         {
             LoadVacancies();
-            btnUpdate.Enabled = false;  
-            btnDelete.Enabled = false; 
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
 
         }
 

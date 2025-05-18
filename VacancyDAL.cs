@@ -26,7 +26,7 @@ namespace recruitment
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@EmployerID", 6);
+                        cmd.Parameters.AddWithValue("@EmployerID", 2);
                         cmd.Parameters.AddWithValue("@JobTitle", vacancy.V_JOBTITLE);
                         cmd.Parameters.AddWithValue("@YearsofExperience", vacancy.V_EXPERIENCEREQUIRED);
                         cmd.Parameters.AddWithValue("@JobDescription", vacancy.V_JOBDESCRIPTION);
