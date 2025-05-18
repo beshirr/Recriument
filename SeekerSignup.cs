@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Recriument;
 
 namespace recruitment
 {
@@ -80,7 +81,7 @@ namespace recruitment
                 cmd2.ExecuteNonQuery();
                 con.Close();
 
-                SeekerHome seekerHome = new SeekerHome();
+                SeekerHome seekerHome = new SeekerHome(Session.CurrentSeekerId);
                 seekerHome.Show();
                 this.Hide();
             }
