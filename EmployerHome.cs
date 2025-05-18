@@ -1,13 +1,6 @@
-﻿using recruitment;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
+using recruitment;
 
 namespace Recriument
 {
@@ -25,6 +18,12 @@ namespace Recriument
             VacancyForm vacancyForm = new VacancyForm();
             vacancyForm.Show();
             this.Hide();
+        }
+
+        private void BtnViewApplicants_Click(object sender, EventArgs e)
+        {
+            var applicantsForm = new ApplicantsForm(employerID);
+            applicantsForm.ShowDialog(this);
         }
     }
 }
