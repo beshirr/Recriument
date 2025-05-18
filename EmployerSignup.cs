@@ -39,7 +39,7 @@ namespace recruitment
 
             try
             {
-                using (SqlConnection con = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection("Data Source=BESHIR\\SQLEXPRESS;Initial Catalog=recruitment;Integrated Security=True;Encrypt=False"))
                 {
                     con.Open();
 

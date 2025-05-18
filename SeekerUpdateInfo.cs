@@ -30,7 +30,7 @@ namespace Recriument
 
         private void update_button_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True");
+            SqlConnection con = new SqlConnection("Data Source=BESHIR\\SQLEXPRESS;Initial Catalog=recruitment;Integrated Security=True;Encrypt=False");
             con.Open();
             string getSkills = "SELECT SKILLS FROM SEEKER WHERE SEEKERID = @SeekerID";
             SqlCommand skillsCmd = new SqlCommand(getSkills, con);

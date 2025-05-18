@@ -43,7 +43,7 @@ namespace recruitment
             }
             else
             {
-                SqlConnection con = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True");
+                SqlConnection con = new SqlConnection("Data Source=BESHIR\\SQLEXPRESS;Initial Catalog=recruitment;Integrated Security=True;Encrypt=False");
                 con.Open();
                 string query = "INSERT INTO SEEKER (S_FNAME, S_LNAME, S_EMAIL, S_PASSWORD, S_EDUCATIONLEVEL, EXPERIENCEYEARS, CERTIFICATIONS, SKILLS)" +
                     " VALUES (@FirstName, @LastName, @Email, @Password, @EducationLevel, @ExperienceYears, @Certifications, @Skills);";

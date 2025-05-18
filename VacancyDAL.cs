@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace recruitment
 {
     internal class VacancyDAL
 
     {
-        
 
-        private static string connectionString = @"Data Source=DESKTOP-64V2LNS\SQLEXPRESS;Initial Catalog=recruitment;Integrated Security=True;Encrypt=True;";
+
+        private static string connectionString = "Data Source=BESHIR\\SQLEXPRESS;Initial Catalog=recruitment;Integrated Security=True;Encrypt=False";
         public static void inserVacancy(Vacancy vacancy)
         {
             try
@@ -23,12 +21,12 @@ namespace recruitment
 
                     string query = @"INSERT INTO Vacancy 
                                  (COMPANYID_, V_JOBTITLE, V_EXPERIENCEREQUIRED, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_SALARY, ISVISIBLE) 
-                                 VALUES (@EmployerID, @JobTitle, ,@YearsofExperience, @JobDescription, @SkillsRequired, @Salary, @IsVisible)";
+                                 VALUES (@EmployerID, @JobTitle, @YearsofExperience, @JobDescription, @SkillsRequired, @Salary, @IsVisible)";
 
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@EmployerID", vacancy.COMPANYID_);
+                        cmd.Parameters.AddWithValue("@EmployerID", 6);
                         cmd.Parameters.AddWithValue("@JobTitle", vacancy.V_JOBTITLE);
                         cmd.Parameters.AddWithValue("@YearsofExperience", vacancy.V_EXPERIENCEREQUIRED);
                         cmd.Parameters.AddWithValue("@JobDescription", vacancy.V_JOBDESCRIPTION);
@@ -36,27 +34,24 @@ namespace recruitment
                         cmd.Parameters.AddWithValue("@Salary", vacancy.V_SALARY);
                         cmd.Parameters.AddWithValue("@IsVisible", vacancy.ISVISIBLE);
 
+                        // Debug output
+                        Console.WriteLine("Query: " + query);
+                        foreach (SqlParameter p in cmd.Parameters)
+                            Console.WriteLine($"{p.ParameterName}: {p.Value}");
+
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                             Console.WriteLine("Vacancy inserted successfully.");
                         else
                             Console.WriteLine("No vacancy was inserted.");
-
-                        
-
                     }
-
-
-
-
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error inserting vacancy: " + ex.Message);
-
+                // For debugging, throw the exception to see the error in your IDE
+                throw;
             }
-
         }
         public static void UpdateVacancy(Vacancy vacancy)
         {
@@ -66,7 +61,7 @@ namespace recruitment
                 {
                     con.Open();
 
-                    string query = @"UPDATE Vacancy SET 
+                    string query = @"UPDATE Vacancy SET
                                 COMPANYID_ = @CompanyID,
                                 V_JOBTITLE = @JobTitle,
                                 V_EXPERIENCEREQUIRED =@Years_of_Experience,
@@ -196,7 +191,7 @@ namespace recruitment
                 {
                     con.Open();
 
-                    string query = @"SELECT VACANCYID, COMPANYID_, V_JOBTITLE, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_EXPERIENCEREQUIRED, V_SALARY, ISVISIBLE 
+                    string query = @"SELECT VACANCYID, COMPANYID_, V_JOBTITLE, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_EXPERIENCEREQUIRED, V_SALARY, ISVISIBLE
                              FROM Vacancy WHERE COMPANYID_ = @CompanyID";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
@@ -245,7 +240,7 @@ namespace recruitment
                 {
                     con.Open();
 
-                    string query = @"SELECT VACANCYID, COMPANYID_, V_JOBTITLE, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_EXPERIENCEREQUIRED, V_SALARY, ISVISIBILE 
+                    string query = @"SELECT VACANCYID, COMPANYID_, V_JOBTITLE, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_EXPERIENCEREQUIRED, V_SALARY, ISVISIBILE
                              FROM Vacancy WHERE VACANCYID = @VacancyID";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
@@ -283,18 +278,18 @@ namespace recruitment
         }
 
 
-        public static int GetCompanyIdByEmployerId(int employerId) 
+        public static int GetCompanyIdByEmployerId(int employerId)
         {
             int companyId = 0;
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                con.Open();
+                conn.Open();
                 string query = "SELECT COMPANYID_ FROM EMPLOYER WHERE EMPLOYERID = @EmployerID";
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@EmployerID", employerId);
-                    var result = cmd.ExecuteScalar();
-                    if (result != null)
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
                         companyId = Convert.ToInt32(result);
                 }
             }

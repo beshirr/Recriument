@@ -1,7 +1,7 @@
-﻿using Recriument;
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Recriument;
 
 namespace recruitment
 {
@@ -25,7 +25,7 @@ namespace recruitment
 
             try
             {
-                using (SqlConnection conn = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection("Data Source=BESHIR\\SQLEXPRESS;Initial Catalog=recruitment;Integrated Security=True;Encrypt=False"))
                 {
                     conn.Open();
 
