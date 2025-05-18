@@ -14,6 +14,7 @@ namespace Recriument
         {
             _employerId = employerId;
             InitializeComponent();
+            dataGridViewApplicants.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             LoadApplicants();
         }
 

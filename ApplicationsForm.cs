@@ -43,6 +43,7 @@ namespace Recriument
                     }
                 }
             }
+            dataGridViewApplications.AutoGenerateColumns = true;
             dataGridViewApplications.DataSource = dt;
         }
     }
