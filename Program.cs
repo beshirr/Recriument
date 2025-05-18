@@ -14,7 +14,7 @@ namespace Recriument
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SeekerHome());
+            Application.Run(new SeekerHome(Session.CurrentSeekerId));
         }
     }
 }

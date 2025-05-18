@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using Recriument;
 using Recruitment;
+
 
 namespace recruitment
 {
@@ -279,6 +281,12 @@ namespace recruitment
             SeekerUpdateInfo seekerUpdateInfo = new SeekerUpdateInfo(_seekerId);
             seekerUpdateInfo.Show();
             this.Hide();
+        }
+
+        private void btnViewApplications_Click(object sender, EventArgs e)
+        {
+            var applicationsForm = new ApplicationsForm(_seekerId);
+            applicationsForm.ShowDialog(this);
         }
     }
 }
