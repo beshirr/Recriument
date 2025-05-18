@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
+using Recruitment;
 
 namespace recruitment
 {
@@ -10,8 +11,11 @@ namespace recruitment
     {
         private const string SearchPlaceholder = "Search by job title, loaction or keywords (e.g. Sales in Cairo)";
         private const string connStr = "Data Source=BESHIR\\SQLEXPRESS;Initial Catalog=recruitment;Integrated Security=True;Encrypt=False";
-        public SeekerHome()
+        private readonly int _seekerId;
+
+        public SeekerHome(int seekerId)
         {
+            _seekerId = seekerId;
             InitializeComponent();
             searchTextHolder.Text = SearchPlaceholder;
             searchTextHolder.ForeColor = System.Drawing.Color.Gray;
@@ -24,7 +28,6 @@ namespace recruitment
             lstJobs.DrawItem += lstJobs_DrawItem;
             lstJobs.MouseDoubleClick += lstJobs_MouseDoubleClick;
 
-            // Populate the job list on startup
             FilterJobs(string.Empty);
         }
 
@@ -229,7 +232,45 @@ namespace recruitment
             int index = lstJobs.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches && lstJobs.Items[index] is Vacancy selectedVacancy)
             {
+                // Open the job details form and pass the selected vacancy
+                using (var jobDetailsForm = new JobDetailsForm(selectedVacancy))
+                {
+                    jobDetailsForm.ShowDialog(this);
+                }
             }
+        }
+
+        public void ApplyToSelectedJob(Vacancy selectedVacancy)
+        {
+            int seekerId = _seekerId; // Use the instance field
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                // 1. Insert into APPLICATION
+                string insertApp = "INSERT INTO APPLICATION (VACANCYID, _STATUS, IS_ACTIVE) OUTPUT INSERTED.APP_ID_ VALUES (@VacancyId, @Status, @IsActive)";
+                int appId;
+                using (SqlCommand cmd = new SqlCommand(insertApp, conn))
+                {
+                    cmd.Parameters.AddWithValue("@VacancyId", selectedVacancy.VACANCYID);
+                    cmd.Parameters.AddWithValue("@Status", "Pending");
+                    cmd.Parameters.AddWithValue("@IsActive", 1);
+                    appId = (int)cmd.ExecuteScalar();
+                }
+
+                // 2. Insert into APPLIES
+                string insertApplies = "INSERT INTO APPLIES (SEEKERID, APP_ID_, DATE) VALUES (@SeekerId, @AppId, @Date)";
+                using (SqlCommand cmd = new SqlCommand(insertApplies, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SeekerId", seekerId);
+                    cmd.Parameters.AddWithValue("@AppId", appId);
+                    cmd.Parameters.AddWithValue("@Date", DateTime.Now);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show("Application submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

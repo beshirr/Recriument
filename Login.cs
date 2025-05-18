@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace recruitment
 {
@@ -22,48 +15,66 @@ namespace recruitment
         {
             string email = email_textbox.Text;
             string password = password_textbox.Text;
-            if (email == "" || password == "")
+
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please enter email and password");
                 return;
             }
-            SqlConnection conn = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True");
-            conn.Open();
-            string seekerQuery = "SELECT S_EMAIL, S_PASSWORD FROM EMPLOYER WHERE S_EMAIL = @Email AND S_PASSWORD = @Password";
-            string employerQuery = "SELECT EMP_EMAIL, EMP_PASSWORD FROM EMPLOYER WHERE EMP_EMAIL = @Email AND EMP_PASSWORD = @Password";
 
-            SqlCommand cmd = new SqlCommand(seekerQuery, conn);
-            cmd.Parameters.AddWithValue("@Email", email);
-            cmd.Parameters.AddWithValue("@Password", password);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows) 
+            try
             {
-                reader.Close();
-                SeekerHome seekerHome = new SeekerHome();
-                seekerHome.Show();
-                this.Hide();
-                return;
+                using (SqlConnection conn = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True"))
+                {
+                    conn.Open();
+
+                    // Check seeker first
+                    string seekerQuery = "SELECT SEEKERID FROM SEEKER WHERE S_EMAIL = @Email AND S_PASSWORD = @Password";
+                    using (SqlCommand seekerCmd = new SqlCommand(seekerQuery, conn))
+                    {
+                        seekerCmd.Parameters.AddWithValue("@Email", email);
+                        seekerCmd.Parameters.AddWithValue("@Password", password);
+
+                        object seekerResult = seekerCmd.ExecuteScalar();
+                        if (seekerResult != null)
+                        {
+                            int seekerId = Convert.ToInt32(seekerResult);
+
+
+                            SeekerHome seekerHome = new SeekerHome(seekerId);
+                            seekerHome.Show();
+                            this.Hide();
+                            return;
+                        }
+                    }
+
+                    // Check employer if not a seeker
+                    string employerQuery = "SELECT EMPLOYERID FROM EMPLOYER WHERE EMP_EMAIL = @Email AND EMP_PASSWORD = @Password";
+                    using (SqlCommand employerCmd = new SqlCommand(employerQuery, conn))
+                    {
+                        employerCmd.Parameters.AddWithValue("@Email", email);
+                        employerCmd.Parameters.AddWithValue("@Password", password);
+
+                        object employerResult = employerCmd.ExecuteScalar();
+                        if (employerResult != null)
+                        {
+                            int employerId = Convert.ToInt32(employerResult);
+
+                            // Open employer home (you'll need to implement this)
+                            // EmployerHome employerHome = new EmployerHome(employerId);
+                            // employerHome.Show();
+                            // this.Hide();
+                            return;
+                        }
+                    }
+
+                    MessageBox.Show("Wrong email or password!");
+                }
             }
-            reader.Close();
-
-            SqlCommand cmd2 = new SqlCommand(employerQuery, conn);
-            cmd2.Parameters.AddWithValue("@Email", email);
-            cmd2.Parameters.AddWithValue("@Password", password);
-
-            SqlDataReader reader2 = cmd2.ExecuteReader();
-            if (reader2.HasRows) 
+            catch (Exception ex)
             {
-                reader2.Close();
-                // Go To Employer home;
-                return;
+                MessageBox.Show($"Login error: {ex.Message}");
             }
-            reader2.Close();
-
-
-            MessageBox.Show("Wrong email or password!");
-            return;
-
         }
     }
 }

@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace recruitment
@@ -47,7 +40,7 @@ namespace recruitment
             {
                 MessageBox.Show("Please fill all the fields");
             }
-            else 
+            else
             {
                 SqlConnection con = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True");
                 con.Open();
@@ -67,7 +60,7 @@ namespace recruitment
                 string sqlID = "SELECT SEEKERID FROM SEEKER WHERE S_EMAIL = @EMAIL";
                 SqlCommand IDcmd = new SqlCommand(sqlID, con);
                 IDcmd.Parameters.AddWithValue("@email", email);
-               
+
                 object result = IDcmd.ExecuteScalar();
                 int seekerId = 0;
 
@@ -75,7 +68,10 @@ namespace recruitment
                 {
                     seekerId = Convert.ToInt32(result);
                 }
-                
+
+                // After verifying credentials and getting SEEKERID from DB
+                Recriument.Session.CurrentSeekerId = seekerId;
+
                 string query2 = "INSERT INTO SEEKER_PHONE (SEEKERID, S_PHONE)" +
                     "VALUES (@SID, @Sphone);";
                 SqlCommand cmd2 = new SqlCommand(query2, con);
