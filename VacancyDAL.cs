@@ -20,13 +20,12 @@ namespace recruitment
                     con.Open();
 
                     string query = @"INSERT INTO Vacancy 
-                                 (COMPANYID_, V_JOBTITLE, V_EXPERIENCEREQUIRED, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_SALARY, ISVISIBLE) 
-                                 VALUES (@EmployerID, @JobTitle, @YearsofExperience, @JobDescription, @SkillsRequired, @Salary, @IsVisible)";
-
+                         (COMPANYID_, V_JOBTITLE, V_EXPERIENCEREQUIRED, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_SALARY, ISVISIBLE) 
+                         VALUES (@CompanyID, @JobTitle, @YearsofExperience, @JobDescription, @SkillsRequired, @Salary, @IsVisible)";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@EmployerID", 2);
+                        cmd.Parameters.AddWithValue("@CompanyID", vacancy.COMPANYID_); // <-- FIXED
                         cmd.Parameters.AddWithValue("@JobTitle", vacancy.V_JOBTITLE);
                         cmd.Parameters.AddWithValue("@YearsofExperience", vacancy.V_EXPERIENCEREQUIRED);
                         cmd.Parameters.AddWithValue("@JobDescription", vacancy.V_JOBDESCRIPTION);
@@ -34,22 +33,12 @@ namespace recruitment
                         cmd.Parameters.AddWithValue("@Salary", vacancy.V_SALARY);
                         cmd.Parameters.AddWithValue("@IsVisible", vacancy.ISVISIBLE);
 
-                        // Debug output
-                        Console.WriteLine("Query: " + query);
-                        foreach (SqlParameter p in cmd.Parameters)
-                            Console.WriteLine($"{p.ParameterName}: {p.Value}");
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                            Console.WriteLine("Vacancy inserted successfully.");
-                        else
-                            Console.WriteLine("No vacancy was inserted.");
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception ex)
             {
-                // For debugging, throw the exception to see the error in your IDE
                 throw;
             }
         }

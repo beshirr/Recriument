@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvVacancies = new System.Windows.Forms.DataGridView();
-            this.VacancyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JobTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExperienceRequired = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Salary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SkillsRequired = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsVisible = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblJobTitle = new System.Windows.Forms.Label();
             this.lblJobDescription = new System.Windows.Forms.Label();
             this.lblSkills = new System.Windows.Forms.Label();
@@ -57,14 +51,8 @@
             // 
             // dgvVacancies
             // 
+            this.dgvVacancies.AutoGenerateColumns = true;
             this.dgvVacancies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVacancies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.VacancyID,
-            this.JobTitle,
-            this.ExperienceRequired,
-            this.Salary,
-            this.SkillsRequired,
-            this.IsVisible});
             this.dgvVacancies.Location = new System.Drawing.Point(3, 2);
             this.dgvVacancies.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvVacancies.Name = "dgvVacancies";
@@ -73,50 +61,6 @@
             this.dgvVacancies.Size = new System.Drawing.Size(679, 210);
             this.dgvVacancies.TabIndex = 0;
             this.dgvVacancies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVacancies_CellContentClick);
-            // 
-            // VacancyID
-            // 
-            this.VacancyID.HeaderText = "VacancyID";
-            this.VacancyID.MinimumWidth = 6;
-            this.VacancyID.Name = "VacancyID";
-            this.VacancyID.ReadOnly = true;
-            this.VacancyID.Visible = false;
-            this.VacancyID.Width = 125;
-            // 
-            // JobTitle
-            // 
-            this.JobTitle.HeaderText = "Job Title\t";
-            this.JobTitle.MinimumWidth = 6;
-            this.JobTitle.Name = "JobTitle";
-            this.JobTitle.Width = 125;
-            // 
-            // ExperienceRequired
-            // 
-            this.ExperienceRequired.HeaderText = "Experience\t";
-            this.ExperienceRequired.MinimumWidth = 6;
-            this.ExperienceRequired.Name = "ExperienceRequired";
-            this.ExperienceRequired.Width = 125;
-            // 
-            // Salary
-            // 
-            this.Salary.HeaderText = "Salary";
-            this.Salary.MinimumWidth = 6;
-            this.Salary.Name = "Salary";
-            this.Salary.Width = 125;
-            // 
-            // SkillsRequired
-            // 
-            this.SkillsRequired.HeaderText = "Skills";
-            this.SkillsRequired.MinimumWidth = 6;
-            this.SkillsRequired.Name = "SkillsRequired";
-            this.SkillsRequired.Width = 125;
-            // 
-            // IsVisible
-            // 
-            this.IsVisible.HeaderText = "Is Visible\t";
-            this.IsVisible.MinimumWidth = 6;
-            this.IsVisible.Name = "IsVisible";
-            this.IsVisible.Width = 125;
             // 
             // lblJobTitle
             // 
@@ -225,6 +169,8 @@
             this.numSalary.Size = new System.Drawing.Size(120, 22);
             this.numSalary.TabIndex = 12;
             this.numSalary.ValueChanged += new System.EventHandler(this.numSalary_ValueChanged);
+            this.numSalary.Maximum = new decimal(new int[] {
+                1000000, 0, 0, 0});
             // 
             // btnAdd
             // 
@@ -300,18 +246,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSalary)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dgvVacancies;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VacancyID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JobTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExperienceRequired;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Salary;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SkillsRequired;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsVisible;
         private System.Windows.Forms.Label lblJobTitle;
         private System.Windows.Forms.Label lblJobDescription;
         private System.Windows.Forms.Label lblSkills;

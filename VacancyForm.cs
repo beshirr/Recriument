@@ -81,6 +81,8 @@ namespace recruitment
                 IsVisible = v.ISVISIBLE ? "Visible" : "Hidden"
             }).ToList();
 
+            dgvVacancies.AutoGenerateColumns = true;
+            dgvVacancies.DataSource = null; // <-- Ensure refresh
             dgvVacancies.DataSource = displayList;
 
             dgvVacancies.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -115,9 +117,13 @@ namespace recruitment
             }
             else
             {
-                ClearForm();
+                // Do NOT call ClearForm() here!
+                // Just disable buttons and clear selection if needed
+                btnUpdate.Enabled = false;
+                btnDelete.Enabled = false;
             }
         }
+
         private void ClearForm()
         {
             txtJobTitle.Clear();
@@ -126,7 +132,6 @@ namespace recruitment
             numExperience.Value = 0;
             numSalary.Value = 0;
             chkIsVisible.Checked = true;
-            dgvVacancies.ClearSelection();
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
         }
@@ -135,8 +140,6 @@ namespace recruitment
         {
             btnUpdate.Enabled = true;  // Now user can click update/save to insert new vacancy
             btnDelete.Enabled = false;
-            dgvVacancies.ClearSelection();
-            // Optionally disable Add button to prevent confusion
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -170,6 +173,7 @@ namespace recruitment
 
             LoadVacancies();
             ClearForm();
+            btnUpdate.Enabled = false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

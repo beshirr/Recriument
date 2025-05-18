@@ -1,14 +1,7 @@
-﻿using recruitment;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using recruitment;
 
 namespace Recriument
 {
@@ -61,7 +54,7 @@ namespace Recriument
 
             if (educationLevel_comboBox.Text != "")
             {
-                string query = "UPDATE SEEKER SET EDUCATIONLEVEL = @NewEducation WHERE SEEKERID = @SeekerID";
+                string query = "UPDATE SEEKER SET S_EDUCATIONLEVEL = @NewEducation WHERE SEEKERID = @SeekerID";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@NewEducation", educationLevel_comboBox.Text);
                 cmd.Parameters.AddWithValue("@SeekerID", currentID);
