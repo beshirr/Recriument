@@ -2,15 +2,15 @@
 {
     partial class ApplicationsForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+
+
+
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +22,10 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+
+
+
+
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -37,9 +37,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.aPPLICATIONBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recruitmentDataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridViewApplications
-            // 
+
+
+
             this.dataGridViewApplications.AutoGenerateColumns = true;
             this.dataGridViewApplications.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewApplications.DataSource = this.aPPLICATIONBindingSource;
@@ -50,23 +50,23 @@
             this.dataGridViewApplications.Size = new System.Drawing.Size(681, 150);
             this.dataGridViewApplications.TabIndex = 0;
             this.dataGridViewApplications.Columns.Clear();
-            // 
-            // aPPLICATIONBindingSource
-            // 
+
+
+
             this.aPPLICATIONBindingSource.DataMember = "APPLICATION";
             this.aPPLICATIONBindingSource.DataSource = this.recruitmentDataSet;
-            // 
-            // recruitmentDataSet
-            // 
+
+
+
             this.recruitmentDataSet.DataSetName = "recruitmentDataSet";
             this.recruitmentDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // aPPLICATIONTableAdapter
-            // 
+
+
+
             this.aPPLICATIONTableAdapter.ClearBeforeFill = true;
-            // 
-            // ApplicationsForm
-            // 
+
+
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);

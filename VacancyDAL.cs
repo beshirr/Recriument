@@ -19,13 +19,13 @@ namespace recruitment
                 {
                     con.Open();
 
-                    string query = @"INSERT INTO Vacancy 
-                         (COMPANYID_, V_JOBTITLE, V_EXPERIENCEREQUIRED, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_SALARY, ISVISIBLE) 
+                    string query = @"INSERT INTO Vacancy
+                         (COMPANYID_, V_JOBTITLE, V_EXPERIENCEREQUIRED, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_SALARY, ISVISIBLE)
                          VALUES (@CompanyID, @JobTitle, @YearsofExperience, @JobDescription, @SkillsRequired, @Salary, @IsVisible)";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@CompanyID", vacancy.COMPANYID_); // <-- FIXED
+                        cmd.Parameters.AddWithValue("@CompanyID", vacancy.COMPANYID_);
                         cmd.Parameters.AddWithValue("@JobTitle", vacancy.V_JOBTITLE);
                         cmd.Parameters.AddWithValue("@YearsofExperience", vacancy.V_EXPERIENCEREQUIRED);
                         cmd.Parameters.AddWithValue("@JobDescription", vacancy.V_JOBDESCRIPTION);

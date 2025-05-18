@@ -29,7 +29,7 @@ namespace recruitment
                 {
                     conn.Open();
 
-                    // Check seeker first
+
                     string seekerQuery = "SELECT SEEKERID FROM SEEKER WHERE S_EMAIL = @Email AND S_PASSWORD = @Password";
                     using (SqlCommand seekerCmd = new SqlCommand(seekerQuery, conn))
                     {
@@ -49,7 +49,7 @@ namespace recruitment
                         }
                     }
 
-                    // Check employer if not a seeker
+
                     string employerQuery = "SELECT EMPLOYERID FROM EMPLOYER WHERE EMP_EMAIL = @Email AND EMP_PASSWORD = @Password";
                     using (SqlCommand employerCmd = new SqlCommand(employerQuery, conn))
                     {

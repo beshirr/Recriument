@@ -23,17 +23,17 @@ namespace Recriument
             {
                 conn.Open();
 
-                // 1. Create interview
+
                 string insertInterview = "INSERT INTO INTERVIEW (INTERVIEWMODE, INTERVIEWDATE) OUTPUT INSERTED.INTERVIEW_ID VALUES (@Mode, @Date)";
                 int interviewId;
                 using (SqlCommand cmd = new SqlCommand(insertInterview, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Mode", "In-Person"); // Or let user choose
+                    cmd.Parameters.AddWithValue("@Mode", "In-Person");
                     cmd.Parameters.AddWithValue("@Date", interviewDate);
                     interviewId = (int)cmd.ExecuteScalar();
                 }
 
-                // 2. Update application with interview id and status
+
                 string updateApp = "UPDATE APPLICATION SET INTERVIEW_ID = @InterviewId, _STATUS = @Status WHERE APP_ID_ = @AppId";
                 using (SqlCommand cmd = new SqlCommand(updateApp, conn))
                 {
@@ -44,7 +44,7 @@ namespace Recriument
                 }
             }
 
-            // 3. (Optional) Send notification (e.g., MessageBox or email)
+
             MessageBox.Show("Interview scheduled and applicant notified.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }

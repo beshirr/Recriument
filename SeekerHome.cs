@@ -66,7 +66,7 @@ namespace recruitment
             {
                 searchTextHolder.Text = SearchPlaceholder;
                 searchTextHolder.ForeColor = System.Drawing.Color.Gray;
-                // Reload all jobs when placeholder is set
+
                 FilterJobs(string.Empty);
             }
         }
@@ -191,12 +191,12 @@ namespace recruitment
             using (var titleFont = new System.Drawing.Font(lstJobs.Font, System.Drawing.FontStyle.Bold))
             using (var descFont = new System.Drawing.Font(lstJobs.Font, System.Drawing.FontStyle.Regular))
             {
-                // Measure title
+
                 var titleSize = e.Graphics.MeasureString(job.V_JOBTITLE, titleFont, lstJobs.Width);
-                // Measure description
+
                 var descSize = e.Graphics.MeasureString(job.V_JOBDESCRIPTION, descFont, lstJobs.Width);
 
-                // Set item height (add some padding)
+
                 e.ItemHeight = (int)(titleSize.Height + descSize.Height + 8);
             }
         }
@@ -209,21 +209,21 @@ namespace recruitment
             var job = lstJobs.Items[e.Index] as Vacancy;
             if (job == null) return;
 
-            // Colors
+
             var titleColor = System.Drawing.Color.Black;
             var descColor = System.Drawing.Color.DimGray;
 
-            // Fonts
+
             using (var titleFont = new System.Drawing.Font(lstJobs.Font.FontFamily, lstJobs.Font.Size + 2, System.Drawing.FontStyle.Bold))
             using (var descFont = new System.Drawing.Font(lstJobs.Font, System.Drawing.FontStyle.Regular))
             using (var titleBrush = new System.Drawing.SolidBrush(titleColor))
             using (var descBrush = new System.Drawing.SolidBrush(descColor))
             {
                 float y = e.Bounds.Top + 2;
-                // Draw title
+
                 e.Graphics.DrawString(job.V_JOBTITLE, titleFont, titleBrush, e.Bounds.Left + 4, y);
                 y += e.Graphics.MeasureString(job.V_JOBTITLE, titleFont, lstJobs.Width).Height;
-                // Draw description
+
                 e.Graphics.DrawString(job.V_JOBDESCRIPTION, descFont, descBrush, e.Bounds.Left + 4, y);
             }
 
@@ -235,7 +235,7 @@ namespace recruitment
             int index = lstJobs.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches && lstJobs.Items[index] is Vacancy selectedVacancy)
             {
-                // Open the job details form and pass the selected vacancy
+
                 using (var jobDetailsForm = new JobDetailsForm(selectedVacancy))
                 {
                     jobDetailsForm.ShowDialog(this);
@@ -245,13 +245,13 @@ namespace recruitment
 
         public void ApplyToSelectedJob(Vacancy selectedVacancy)
         {
-            int seekerId = _seekerId; // Use the instance field
+            int seekerId = _seekerId;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
 
-                // 1. Insert into APPLICATION
+
                 string insertApp = "INSERT INTO APPLICATION (VACANCYID, _STATUS, IS_ACTIVE) OUTPUT INSERTED.APP_ID_ VALUES (@VacancyId, @Status, @IsActive)";
                 int appId;
                 using (SqlCommand cmd = new SqlCommand(insertApp, conn))
@@ -262,7 +262,7 @@ namespace recruitment
                     appId = (int)cmd.ExecuteScalar();
                 }
 
-                // 2. Insert into APPLIES
+
                 string insertApplies = "INSERT INTO APPLIES (SEEKERID, APP_ID_, DATE) VALUES (@SeekerId, @AppId, @Date)";
                 using (SqlCommand cmd = new SqlCommand(insertApplies, conn))
                 {
@@ -290,17 +290,3 @@ namespace recruitment
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

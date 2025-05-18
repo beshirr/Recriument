@@ -43,12 +43,12 @@ namespace recruitment
                 {
                     con.Open();
 
-                    // First create a default company (since schema requires COMPANYID_)
+
                     string companyQuery = "INSERT INTO COMPANY (C_NAME) VALUES ('New Company'); SELECT SCOPE_IDENTITY();";
                     SqlCommand companyCmd = new SqlCommand(companyQuery, con);
                     int companyId = Convert.ToInt32(companyCmd.ExecuteScalar());
 
-                    // Then insert employer with the company ID
+
                     string employerQuery = @"INSERT INTO EMPLOYER (COMPANYID_, EMP_FNAME, EMP_LNAME, EMP_EMAIL, EMP_PASSWORD, EMP_DEPARTMENT, EMP_POSITION_TITLE)
                                            VALUES (@CompanyId, @FirstName, @LastName, @Email, @Password, @Department, @PositionTitle)";
 

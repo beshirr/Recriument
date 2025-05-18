@@ -70,7 +70,7 @@ namespace recruitment
                     seekerId = Convert.ToInt32(result);
                 }
 
-                // After verifying credentials and getting SEEKERID from DB
+
                 Recriument.Session.CurrentSeekerId = seekerId;
 
                 string query2 = "INSERT INTO SEEKER_PHONE (SEEKERID, S_PHONE)" +
