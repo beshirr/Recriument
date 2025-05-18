@@ -27,7 +27,7 @@ namespace recruitment
                 MessageBox.Show("Please enter email and password");
                 return;
             }
-            SqlConnection conn = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRequirements;Integrated Security=True;Encrypt=True");
+            SqlConnection conn = new SqlConnection("Data Source=LAPTOP-HRLK7A2F\\MSSQLSERVER01;Initial Catalog=OnlineRecruitment;Integrated Security=True");
             conn.Open();
             string seekerQuery = "SELECT S_EMAIL, S_PASSWORD FROM EMPLOYER WHERE S_EMAIL = @Email AND S_PASSWORD = @Password";
             string employerQuery = "SELECT EMP_EMAIL, EMP_PASSWORD FROM EMPLOYER WHERE EMP_EMAIL = @Email AND EMP_PASSWORD = @Password";
@@ -40,8 +40,8 @@ namespace recruitment
             if (reader.HasRows) 
             {
                 reader.Close();
-                SeekerHome seekerHome = new SeekerHome();
-                seekerHome.Show();
+                //SeekerHome seekerHome = new SeekerHome();
+                //seekerHome.Show();
                 this.Hide();
                 return;
             }
