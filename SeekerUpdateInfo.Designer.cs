@@ -111,6 +111,7 @@
             this.done_button.TabIndex = 6;
             this.done_button.Text = "Done";
             this.done_button.UseVisualStyleBackColor = true;
+            this.done_button.Click += new System.EventHandler(this.done_button_Click);
             // 
             // experienceYears_textbox
             // 

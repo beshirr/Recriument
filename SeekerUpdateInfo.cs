@@ -1,4 +1,5 @@
-﻿using System;
+﻿using recruitment;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,5 +20,11 @@ namespace Recriument
             this.currentID = currentID;
         }
 
+        private void done_button_Click(object sender, EventArgs e)
+        {
+            SeekerHome seekerHome = new SeekerHome(currentID);
+            seekerHome.Show();
+            this.Hide();
+        }
     }
 }

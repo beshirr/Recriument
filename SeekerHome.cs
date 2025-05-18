@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
+using Recriument;
 using Recruitment;
 
 namespace recruitment
@@ -271,6 +272,13 @@ namespace recruitment
             }
 
             MessageBox.Show("Application submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void updateInfo_button_Click(object sender, EventArgs e)
+        {
+            SeekerUpdateInfo seekerUpdateInfo = new SeekerUpdateInfo(_seekerId);
+            seekerUpdateInfo.Show();
+            this.Hide();
         }
     }
 }
