@@ -87,7 +87,6 @@
             this.experienceYears_textbox.Name = "experienceYears_textbox";
             this.experienceYears_textbox.Size = new System.Drawing.Size(207, 20);
             this.experienceYears_textbox.TabIndex = 4;
-            this.experienceYears_textbox.Text = "Enter the number of years of experience";
             // 
             // skills_textbox
             // 
@@ -95,7 +94,6 @@
             this.skills_textbox.Name = "skills_textbox";
             this.skills_textbox.Size = new System.Drawing.Size(207, 20);
             this.skills_textbox.TabIndex = 6;
-            this.skills_textbox.Text = "Write your skills comma seperated";
             // 
             // certifications_textbox
             // 
@@ -103,7 +101,6 @@
             this.certifications_textbox.Name = "certifications_textbox";
             this.certifications_textbox.Size = new System.Drawing.Size(207, 20);
             this.certifications_textbox.TabIndex = 7;
-            this.certifications_textbox.Text = "Write your certifications comma seperated";
             // 
             // educationLevel_comboBox
             // 
@@ -118,7 +115,6 @@
             this.educationLevel_comboBox.Name = "educationLevel_comboBox";
             this.educationLevel_comboBox.Size = new System.Drawing.Size(172, 21);
             this.educationLevel_comboBox.TabIndex = 8;
-            this.educationLevel_comboBox.Text = "Choose your education level";
             // 
             // title_label
             // 

@@ -72,7 +72,6 @@
             this.email_textbox.Name = "email_textbox";
             this.email_textbox.Size = new System.Drawing.Size(214, 20);
             this.email_textbox.TabIndex = 3;
-            this.email_textbox.Text = "Enter your email";
             // 
             // password_textbox
             // 
@@ -80,7 +79,6 @@
             this.password_textbox.Name = "password_textbox";
             this.password_textbox.Size = new System.Drawing.Size(214, 20);
             this.password_textbox.TabIndex = 4;
-            this.password_textbox.Text = "Enter your password";
             // 
             // login_button
             // 

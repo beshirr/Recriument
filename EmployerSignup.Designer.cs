@@ -85,7 +85,6 @@
             this.department_textbox.Name = "department_textbox";
             this.department_textbox.Size = new System.Drawing.Size(193, 20);
             this.department_textbox.TabIndex = 4;
-            this.department_textbox.Text = "Enter your department ";
             // 
             // positionTitle_textbox
             // 
@@ -93,7 +92,6 @@
             this.positionTitle_textbox.Name = "positionTitle_textbox";
             this.positionTitle_textbox.Size = new System.Drawing.Size(193, 20);
             this.positionTitle_textbox.TabIndex = 5;
-            this.positionTitle_textbox.Text = "Enter your position title";
             // 
             // linkedinURL_textbox
             // 
@@ -101,7 +99,7 @@
             this.linkedinURL_textbox.Name = "linkedinURL_textbox";
             this.linkedinURL_textbox.Size = new System.Drawing.Size(193, 20);
             this.linkedinURL_textbox.TabIndex = 6;
-            this.linkedinURL_textbox.Text = "Enter your profile URL";
+            this.linkedinURL_textbox.Text = "s";
             // 
             // submit_button
             // 

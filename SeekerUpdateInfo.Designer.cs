@@ -138,6 +138,12 @@
             // educationLevel_comboBox
             // 
             this.educationLevel_comboBox.FormattingEnabled = true;
+            this.educationLevel_comboBox.Items.AddRange(new object[] {
+            "Diploma",
+            "Bachelor",
+            "Master",
+            "PhD",
+            "High School"});
             this.educationLevel_comboBox.Location = new System.Drawing.Point(341, 165);
             this.educationLevel_comboBox.Name = "educationLevel_comboBox";
             this.educationLevel_comboBox.Size = new System.Drawing.Size(170, 21);
