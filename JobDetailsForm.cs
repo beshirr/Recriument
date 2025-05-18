@@ -16,12 +16,12 @@ namespace recruitment
 
         private void DisplayJobDetails()
         {
-            lblTitle.Text = _vacancy.JobTitle;
-            lblDescription.Text = _vacancy.JobDescription;
-            lblSkills.Text = "Skills: " + string.Join(", ", _vacancy.SkillsRequired);
-            lblExperience.Text = "Experience: " + _vacancy.ExperienceRequired;
-            lblSalary.Text = "Salary: " + _vacancy.Salary.ToString("C");
-            lblLocation.Text = "Location: " + _vacancy.Location;
+            //lblTitle.Text = _vacancy.JobTitle;
+            //lblDescription.Text = _vacancy.JobDescription;
+            //lblSkills.Text = "Skills: " + string.Join(", ", _vacancy.SkillsRequired);
+            //lblExperience.Text = "Experience: " + _vacancy.ExperienceRequired;
+            //lblSalary.Text = "Salary: " + _vacancy.Salary.ToString("C");
+            //lblLocation.Text = "Location: " + _vacancy.Location;
             // Add more fields as needed
         }
 

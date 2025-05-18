@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
-using recruitment;
 
 namespace recruitment
 {
@@ -154,27 +152,28 @@ namespace recruitment
         private List<Vacancy> GetAllJobs()
         {
             var jobs = new List<Vacancy>();
-                conn.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+            string query = "SELECT VACANCYID, V_JOBTITLE, V_JOBDESCRIPTION, V_SALARY, V_EXPERIENCEREQUIRED, V_SKILLSREQUIRED FROM VACANCY";
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    jobs.Add(new Vacancy
                     {
-                        jobs.Add(new Vacancy
-                        {
-                            VACANCYID = reader.GetInt32(0),
-                            V_JOBTITLE = reader.GetString(1),
-                            V_JOBDESCRIPTION = reader.GetString(2),
-                            V_SALARY = reader.GetDecimal(3),
-                            V_EXPERIENCEREQUIRED = reader.GetInt32(4),
-                            V_SKILLSREQUIRED = reader.GetString(5).Split(',').ToList(),
-                            PostedBy = new Employer { Id = reader.GetInt32(6), firstName = reader.GetString(7) }
-                        });
-                    }
+                        VACANCYID = reader.GetInt32(0),
+                        V_JOBTITLE = reader.GetString(1),
+                        V_JOBDESCRIPTION = reader.GetString(2),
+                        V_SALARY = reader.GetDecimal(3),
+                        V_EXPERIENCEREQUIRED = reader.GetInt32(4),
+                        V_SKILLSREQUIRED = reader.GetString(5).Split(',').ToList(),
+                    });
                 }
             }
-            return jobs;
-        }
 
+            return jobs;
         }
 
         private void lstJobs_MeasureItem(object sender, MeasureItemEventArgs e)
@@ -234,6 +233,16 @@ namespace recruitment
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
