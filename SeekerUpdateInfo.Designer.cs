@@ -101,6 +101,7 @@
             this.update_button.TabIndex = 5;
             this.update_button.Text = "Update";
             this.update_button.UseVisualStyleBackColor = false;
+            this.update_button.Click += new System.EventHandler(this.update_button_Click);
             // 
             // done_button
             // 
