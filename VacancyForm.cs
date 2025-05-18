@@ -14,17 +14,20 @@ namespace recruitment
     public partial class VacancyForm : Form
     {
         private int employerId;
+        private int companyId;
 
 
         public VacancyForm(int currentID)
         {
+            this.employerId = currentID;
+            this.companyId = VacancyDAL.GetCompanyIdByEmployerId(employerId); 
+
             InitializeComponent();
             this.Load += VacancyForm_Load;
             dgvVacancies.SelectionChanged += dgvVacancies_SelectionChanged;
             btnAdd.Click += btnAdd_Click; 
             btnUpdate.Click += btnUpdate_Click; 
             btnDelete.Click += btnDelete_Click; 
-            this.employerId = currentID;
 
         }
 
@@ -71,7 +74,7 @@ namespace recruitment
 
         private void LoadVacancies()
         {
-            var vacancies = VacancyDAL.GetVacanciesByEmployer(employerId);
+            var vacancies = VacancyDAL.GetVacanciesByCompanyId(companyId); 
 
             var displayList = vacancies.Select(v => new
             {
@@ -146,13 +149,14 @@ namespace recruitment
             {
                 Vacancy vacancy = new Vacancy
                 {
+                    COMPANYID_ = companyId, 
+
                     V_JOBTITLE = txtJobTitle.Text,
                     V_JOBDESCRIPTION = txtJobDescription.Text,
                     V_SKILLSREQUIRED = txtSkills.Text.Split(',').Select(s => s.Trim()).ToList(),
                     V_EXPERIENCEREQUIRED = (int)numExperience.Value,
                     V_SALARY = numSalary.Value,
                     ISVISIBLE = chkIsVisible.Checked,
-                    COMPANYID_ = employerId
                 };
 
                 if (dgvVacancies.SelectedRows.Count > 0)

@@ -65,12 +65,12 @@
             this.Salary,
             this.SkillsRequired,
             this.IsVisible});
-            this.dgvVacancies.Location = new System.Drawing.Point(2, 2);
-            this.dgvVacancies.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvVacancies.Location = new System.Drawing.Point(3, 2);
+            this.dgvVacancies.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvVacancies.Name = "dgvVacancies";
             this.dgvVacancies.RowHeadersWidth = 51;
             this.dgvVacancies.RowTemplate.Height = 24;
-            this.dgvVacancies.Size = new System.Drawing.Size(508, 171);
+            this.dgvVacancies.Size = new System.Drawing.Size(679, 210);
             this.dgvVacancies.TabIndex = 0;
             this.dgvVacancies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVacancies_CellContentClick);
             // 
@@ -121,10 +121,9 @@
             // lblJobTitle
             // 
             this.lblJobTitle.AutoSize = true;
-            this.lblJobTitle.Location = new System.Drawing.Point(20, 199);
-            this.lblJobTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblJobTitle.Location = new System.Drawing.Point(27, 245);
             this.lblJobTitle.Name = "lblJobTitle";
-            this.lblJobTitle.Size = new System.Drawing.Size(47, 26);
+            this.lblJobTitle.Size = new System.Drawing.Size(59, 32);
             this.lblJobTitle.TabIndex = 1;
             this.lblJobTitle.Text = "Job Title\n\n";
             this.lblJobTitle.Click += new System.EventHandler(this.label1_Click);
@@ -132,10 +131,9 @@
             // lblJobDescription
             // 
             this.lblJobDescription.AutoSize = true;
-            this.lblJobDescription.Location = new System.Drawing.Point(20, 232);
-            this.lblJobDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblJobDescription.Location = new System.Drawing.Point(27, 286);
             this.lblJobDescription.Name = "lblJobDescription";
-            this.lblJobDescription.Size = new System.Drawing.Size(77, 13);
+            this.lblJobDescription.Size = new System.Drawing.Size(98, 16);
             this.lblJobDescription.TabIndex = 2;
             this.lblJobDescription.Text = "JobDescription";
             this.lblJobDescription.Click += new System.EventHandler(this.label1_Click_1);
@@ -143,10 +141,9 @@
             // lblSkills
             // 
             this.lblSkills.AutoSize = true;
-            this.lblSkills.Location = new System.Drawing.Point(20, 262);
-            this.lblSkills.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSkills.Location = new System.Drawing.Point(27, 322);
             this.lblSkills.Name = "lblSkills";
-            this.lblSkills.Size = new System.Drawing.Size(31, 13);
+            this.lblSkills.Size = new System.Drawing.Size(39, 16);
             this.lblSkills.TabIndex = 3;
             this.lblSkills.Text = "Skills";
             this.lblSkills.Click += new System.EventHandler(this.label2_Click);
@@ -154,49 +151,47 @@
             // lblExperience
             // 
             this.lblExperience.AutoSize = true;
-            this.lblExperience.Location = new System.Drawing.Point(20, 292);
-            this.lblExperience.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblExperience.Location = new System.Drawing.Point(27, 359);
             this.lblExperience.Name = "lblExperience";
-            this.lblExperience.Size = new System.Drawing.Size(105, 13);
+            this.lblExperience.Size = new System.Drawing.Size(131, 16);
             this.lblExperience.TabIndex = 4;
             this.lblExperience.Text = "Years of  Experience";
             this.lblExperience.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtJobTitle
             // 
-            this.txtJobTitle.Location = new System.Drawing.Point(173, 199);
-            this.txtJobTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtJobTitle.Location = new System.Drawing.Point(231, 245);
+            this.txtJobTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtJobTitle.Name = "txtJobTitle";
-            this.txtJobTitle.Size = new System.Drawing.Size(76, 20);
+            this.txtJobTitle.Size = new System.Drawing.Size(100, 22);
             this.txtJobTitle.TabIndex = 5;
             this.txtJobTitle.TextChanged += new System.EventHandler(this.txtJobTitle_TextChanged);
             // 
             // txtJobDescription
             // 
-            this.txtJobDescription.Location = new System.Drawing.Point(173, 232);
-            this.txtJobDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtJobDescription.Location = new System.Drawing.Point(231, 286);
+            this.txtJobDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtJobDescription.Multiline = true;
             this.txtJobDescription.Name = "txtJobDescription";
-            this.txtJobDescription.Size = new System.Drawing.Size(76, 19);
+            this.txtJobDescription.Size = new System.Drawing.Size(100, 22);
             this.txtJobDescription.TabIndex = 6;
             this.txtJobDescription.TextChanged += new System.EventHandler(this.txtJobDescription_TextChanged);
             // 
             // txtSkills
             // 
-            this.txtSkills.Location = new System.Drawing.Point(173, 262);
-            this.txtSkills.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSkills.Location = new System.Drawing.Point(231, 322);
+            this.txtSkills.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSkills.Name = "txtSkills";
-            this.txtSkills.Size = new System.Drawing.Size(76, 20);
+            this.txtSkills.Size = new System.Drawing.Size(100, 22);
             this.txtSkills.TabIndex = 7;
             this.txtSkills.TextChanged += new System.EventHandler(this.txtSkills_TextChanged);
             // 
             // lblSalary
             // 
             this.lblSalary.AutoSize = true;
-            this.lblSalary.Location = new System.Drawing.Point(22, 319);
-            this.lblSalary.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSalary.Location = new System.Drawing.Point(29, 393);
             this.lblSalary.Name = "lblSalary";
-            this.lblSalary.Size = new System.Drawing.Size(36, 13);
+            this.lblSalary.Size = new System.Drawing.Size(46, 16);
             this.lblSalary.TabIndex = 9;
             this.lblSalary.Text = "Salary";
             this.lblSalary.Click += new System.EventHandler(this.label4_Click);
@@ -204,10 +199,10 @@
             // chkIsVisible
             // 
             this.chkIsVisible.AutoSize = true;
-            this.chkIsVisible.Location = new System.Drawing.Point(173, 348);
-            this.chkIsVisible.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsVisible.Location = new System.Drawing.Point(231, 428);
+            this.chkIsVisible.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkIsVisible.Name = "chkIsVisible";
-            this.chkIsVisible.Size = new System.Drawing.Size(67, 17);
+            this.chkIsVisible.Size = new System.Drawing.Size(83, 20);
             this.chkIsVisible.TabIndex = 10;
             this.chkIsVisible.Text = "Is Visible\t";
             this.chkIsVisible.UseVisualStyleBackColor = true;
@@ -215,28 +210,28 @@
             // 
             // numExperience
             // 
-            this.numExperience.Location = new System.Drawing.Point(173, 292);
-            this.numExperience.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numExperience.Location = new System.Drawing.Point(231, 359);
+            this.numExperience.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numExperience.Name = "numExperience";
-            this.numExperience.Size = new System.Drawing.Size(90, 20);
+            this.numExperience.Size = new System.Drawing.Size(120, 22);
             this.numExperience.TabIndex = 11;
             this.numExperience.ValueChanged += new System.EventHandler(this.numExperience_ValueChanged);
             // 
             // numSalary
             // 
-            this.numSalary.Location = new System.Drawing.Point(173, 317);
-            this.numSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numSalary.Location = new System.Drawing.Point(231, 390);
+            this.numSalary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numSalary.Name = "numSalary";
-            this.numSalary.Size = new System.Drawing.Size(90, 20);
+            this.numSalary.Size = new System.Drawing.Size(120, 22);
             this.numSalary.TabIndex = 12;
             this.numSalary.ValueChanged += new System.EventHandler(this.numSalary_ValueChanged);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(391, 232);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Location = new System.Drawing.Point(521, 286);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(56, 19);
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 13;
             this.btnAdd.Text = "Add New";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -244,10 +239,10 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(391, 260);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUpdate.Location = new System.Drawing.Point(521, 320);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(56, 19);
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 14;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -255,10 +250,10 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(391, 287);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelete.Location = new System.Drawing.Point(521, 353);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(56, 19);
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -266,9 +261,10 @@
             // 
             // done_button
             // 
-            this.done_button.Location = new System.Drawing.Point(372, 342);
+            this.done_button.Location = new System.Drawing.Point(496, 421);
+            this.done_button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.done_button.Name = "done_button";
-            this.done_button.Size = new System.Drawing.Size(75, 23);
+            this.done_button.Size = new System.Drawing.Size(100, 28);
             this.done_button.TabIndex = 16;
             this.done_button.Text = "Done";
             this.done_button.UseVisualStyleBackColor = true;
@@ -276,9 +272,9 @@
             // 
             // VacancyForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 372);
+            this.ClientSize = new System.Drawing.Size(800, 458);
             this.Controls.Add(this.done_button);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
@@ -295,7 +291,7 @@
             this.Controls.Add(this.lblJobDescription);
             this.Controls.Add(this.lblJobTitle);
             this.Controls.Add(this.dgvVacancies);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "VacancyForm";
             this.Text = "VacancyForm";
             this.Load += new System.EventHandler(this.VacancyForm_Load);

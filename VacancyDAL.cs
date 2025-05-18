@@ -22,7 +22,7 @@ namespace recruitment
                     con.Open();
 
                     string query = @"INSERT INTO Vacancy 
-                                 (COMPANYID_, V_JOBTITLE, V_EXPERIENCEREQUIRED, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_SALARY, ISVISIBILE) 
+                                 (COMPANYID_, V_JOBTITLE, V_EXPERIENCEREQUIRED, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_SALARY, ISVISIBLE) 
                                  VALUES (@EmployerID, @JobTitle, ,@YearsofExperience, @JobDescription, @SkillsRequired, @Salary, @IsVisible)";
 
 
@@ -67,7 +67,7 @@ namespace recruitment
                     con.Open();
 
                     string query = @"UPDATE Vacancy SET 
-                                COMPANYID_ = @EmployerID,
+                                COMPANYID_ = @CompanyID,
                                 V_JOBTITLE = @JobTitle,
                                 V_EXPERIENCEREQUIRED =@Years_of_Experience,
                                 V_JOBDESCRIPTION = @JobDescription,
@@ -78,7 +78,7 @@ namespace recruitment
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@EmployerID", vacancy.COMPANYID_);
+                        cmd.Parameters.AddWithValue("@CompanyID", vacancy.COMPANYID_);
                         cmd.Parameters.AddWithValue("@JobTitle", vacancy.V_JOBTITLE);
                         cmd.Parameters.AddWithValue("@YearsofExperience", vacancy.V_EXPERIENCEREQUIRED);
                         cmd.Parameters.AddWithValue("@JobDescription", vacancy.V_JOBDESCRIPTION);
@@ -186,7 +186,7 @@ namespace recruitment
                 Console.WriteLine("Error hiding vacancy: " + ex.Message);
             }
         }
-        public static List<Vacancy> GetVacanciesByEmployer(int employerID)
+        public static List<Vacancy> GetVacanciesByCompanyId(int companyId)
         {
             List<Vacancy> vacancies = new List<Vacancy>();
 
@@ -196,30 +196,32 @@ namespace recruitment
                 {
                     con.Open();
 
-                    string query = @"SELECT VACANCYID, COMPANYID_, V_JOBTITLE, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_EXPERIENCEREQUIRED, V_SALARY, ISVISIBILE 
-                             FROM Vacancy WHERE COMPANYID_ = @EmployerID";
+                    string query = @"SELECT VACANCYID, COMPANYID_, V_JOBTITLE, V_JOBDESCRIPTION, V_SKILLSREQUIRED, V_EXPERIENCEREQUIRED, V_SALARY, ISVISIBLE 
+                             FROM Vacancy WHERE COMPANYID_ = @CompanyID";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@EmployerID", employerID);
+                        cmd.Parameters.AddWithValue("@CompanyID", companyId);
 
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                Vacancy v = new Vacancy
+                                var vacancy = new Vacancy
                                 {
-                                    VACANCYID = reader.GetInt32(0),
-                                    COMPANYID_ = reader.GetInt32(1),
-                                    V_JOBTITLE = reader.GetString(2),
-                                    V_JOBDESCRIPTION = reader.GetString(3),
-                                    V_SKILLSREQUIRED = reader.GetString(4).Split(',').Select(s => s.Trim()).ToList(),
-                                    V_EXPERIENCEREQUIRED = reader.GetInt32(5),
-                                    V_SALARY = reader.GetDecimal(6),
-                                    ISVISIBLE = reader.GetBoolean(7)
+                                    VACANCYID = (int)reader["VACANCYID"],
+                                    COMPANYID_ = (int)reader["COMPANYID_"],
+                                    V_JOBTITLE = reader["V_JOBTITLE"].ToString(),
+                                    V_SALARY = Convert.ToDecimal(reader["V_SALARY"]),
+                                    V_EXPERIENCEREQUIRED = Convert.ToInt32(reader["V_EXPERIENCEREQUIRED"]),
+                                    V_SKILLSREQUIRED = reader["V_SKILLSREQUIRED"].ToString()
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => s.Trim())
+                    .ToList(),
+                                    V_JOBDESCRIPTION = reader["V_JOBDESCRIPTION"].ToString(),
+                                    ISVISIBLE = Convert.ToBoolean(reader["ISVISIBLE"])
                                 };
-
-                                vacancies.Add(v);
+                                vacancies.Add(vacancy);
                             }
                         }
                     }
@@ -260,7 +262,9 @@ namespace recruitment
                                     COMPANYID_ = reader.GetInt32(1),
                                     V_JOBTITLE = reader.GetString(2),
                                     V_JOBDESCRIPTION = reader.GetString(3),
-                                    V_SKILLSREQUIRED = reader.GetString(4).Split(',').Select(s => s.Trim()).ToList(),
+                                    V_SKILLSREQUIRED = reader.GetString(4).Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => s.Trim())
+                    .ToList(),
                                     V_EXPERIENCEREQUIRED = reader.GetInt32(5),
                                     V_SALARY = reader.GetDecimal(6),
                                     ISVISIBLE = reader.GetBoolean(7)
@@ -277,5 +281,29 @@ namespace recruitment
 
             return vacancy;
         }
+
+
+        public static int GetCompanyIdByEmployerId(int employerId) 
+        {
+            int companyId = 0;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string query = "SELECT COMPANYID_ FROM EMPLOYER WHERE EMPLOYERID = @EmployerID";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@EmployerID", employerId);
+                    var result = cmd.ExecuteScalar();
+                    if (result != null)
+                        companyId = Convert.ToInt32(result);
+                }
+            }
+            return companyId;
+        }
+
+
+
+
+
     }
 }
