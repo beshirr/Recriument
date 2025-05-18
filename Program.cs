@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 ﻿using recruitment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+=======
+﻿using System;
+>>>>>>> e07fc64c6836698445829d7526136bfb0df4091c
 using System.Windows.Forms;
 
 namespace Recriument
