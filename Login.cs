@@ -40,8 +40,8 @@ namespace recruitment
             if (reader.HasRows) 
             {
                 reader.Close();
-                //SeekerHome seekerHome = new SeekerHome();
-                //seekerHome.Show();
+                SeekerHome seekerHome = new SeekerHome();
+                seekerHome.Show();
                 this.Hide();
                 return;
             }

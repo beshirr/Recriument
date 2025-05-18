@@ -84,8 +84,8 @@ namespace recruitment
                 cmd2.ExecuteNonQuery();
                 con.Close();
 
-                //SeekerHome seekerHome = new SeekerHome();
-                //seekerHome.Show();
+                SeekerHome seekerHome = new SeekerHome();
+                seekerHome.Show();
                 this.Hide();
             }
         }
